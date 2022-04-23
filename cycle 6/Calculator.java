@@ -1,29 +1,33 @@
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
-import java.util.*;
+
+ 
 class Calculator
 {
     Calculator()
     {
         //CONTAINERS
-        JFrame frame = new JFrame("Simple Calculator");
+        JFrame frame = new JFrame("Simple Calc");
         JPanel panel = new JPanel();
         JPanel panel1 = new JPanel();
         JPanel inputPanel = new JPanel();
         panel.setLayout(new GridLayout(4,3));
+        
         panel1.setLayout(new GridLayout(6,1));
+
         inputPanel.setLayout(new GridBagLayout());
         frame.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
-        frame.setBounds(825,0,350,400);
+        frame.setBounds(625,0,250,300);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         //COMPONENTS
         JTextField result = new JTextField();
         JButton one = new JButton("1");
         JButton two = new JButton("2");
-        JButton three = new JButton("3");JButton four = new JButton("4");
+        JButton three = new JButton("3");
+        JButton four = new JButton("4");
         JButton five = new JButton("5");
         JButton six = new JButton("6");
         JButton seven = new JButton("7");
@@ -56,25 +60,22 @@ class Calculator
         panel1.add(by);
         panel1.add(mod);
         panel1.add(equal);
-        c.gridx = 0;
-        c.gridy = 0;
-        c.fill = GridBagConstraints.BOTH;
-        c.weightx = 1;
-        c.weighty = 0.4;
+        
+        c.fill = GridBagConstraints.HORIZONTAL;
+        
+       
         result.setHorizontalAlignment(JTextField.CENTER);
         frame.add(result, c);
-        c.gridx = 0;
-        c.gridy = 0;
-        c.weightx = 3;
-        c.weighty = 1;
+        
         inputPanel.add(panel, c);
-        c.gridx = 1;
-        c.weightx = 1;
-        inputPanel.add(panel1, c);c.gridx = 0;
-        c.gridy = 1;
+       
+        inputPanel.add(panel1, c);
+        c.gridx = 0;
+        
         frame.add(inputPanel, c);
         frame.setVisible(true);
         panel.setVisible(true);
+
         panel1.setVisible(true);
         inputPanel.setVisible(true);
         
@@ -184,7 +185,7 @@ class Calculator
             public void keyPressed(KeyEvent ae) {
                 if (ae.getKeyCode() == KeyEvent.VK_ENTER) {
                     String exp = result.getText();
-                    int i = 1;
+                    int i = 1,flag=0;
                     float x, y, res = 0;
                     char z = exp.charAt(1);
                     try
@@ -209,15 +210,25 @@ class Calculator
                                 break;
                             case '/':
                                 if(y == 0)
-                                    break;
+                                {
+                                    flag=1;
+                                   
+                                }
+                                else
                                 res = x/y;
                                 break;
                             case '%':
+                                if(y == 0)
+                                    {
+                                        flag=1;
+                                        
+                                    }
+                                    else
                                 res = x%y;
                                 break;
                         }
-                        if(y == 0)
-                            result.setText("Not defined!");
+                        if(flag == 1)
+                           result.setText("MATH ERROR");
                         else if(res == (int)res)
                             result.setText((int)res+"");
                         else
@@ -233,7 +244,7 @@ class Calculator
         {
             public void actionPerformed(ActionEvent ae){
             String exp = result.getText();
-            int i = 1;
+            int i = 1,flag=0;
             float x, y, res = 0;
             char z = exp.charAt(1);
             try
@@ -256,21 +267,31 @@ class Calculator
                     case '*':
                         res = x*y;
                         break;
-                    case '/':
+                        case '/':
                         if(y == 0)
-                            break;
+                        {
+                            flag=1;
+                            
+                        }
+                        else
                         res = x/y;
                         break;
                     case '%':
+                        if(y == 0)
+                            {
+                                flag=1;
+                                
+                            }
+                            else
                         res = x%y;
                         break;
                 }
-                if(y == 0)
-                    result.setText("Not defined!");
-                else if(res == (int)res)
-                    result.setText((int)res+"");
-                else
-                    result.setText(res+"");
+                if(flag == 1)
+                result.setText("MATH ERROR");
+                        else if(res == (int)res)
+                            result.setText((int)res+"");
+                        else
+                            result.setText(res+"");
             }catch(Exception e)
             {
                 result.setText("Enter two operands!");

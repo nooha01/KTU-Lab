@@ -1,52 +1,63 @@
+import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.Arrays;
 
-class QuickSort
-{
-    static int partition(String[] arr, int p, int r)
+public class Quicksort {
+    public static void main(String[] args) 
     {
+        Scanner scanner = new Scanner(System.in);
+        
+        System.out.println("Enter the Names:");
         String temp;
-        String x = arr[r];
-        int i = p - 1;
-        for(int j = p; j < r; j++)
-            if(arr[j].toLowerCase().compareTo(x.toLowerCase()) <= 0)
-            {
-                if(i++ != j)
-                {
-                    temp = arr[i];
-                    arr[i] = arr[j];
-                    arr[j] = temp;
-                }
-            }
-        if(r != i+1)
+        ArrayList<String> names = new ArrayList<>();
+        temp="";
+        while(!temp.equals("stop"))
         {
-            temp = arr[i+1];
-            arr[i+1] = arr[r];
-            arr[r] = temp;
-        }
-        return i+1;
+            temp=scanner.next();
+            if(!temp.equals("stop"))
+            names.add(temp);
+            
+        } 
+        quickSort(names, 0, names.size() - 1);
+        System.out.print("Sorted names:");
+        System.out.print(names + " ");
+    
     }
 
-    static void quickSort(String[] arr, int p, int r)
+
+     static void quickSort(ArrayList<String> names, int start, int end) 
     {
-        if(p<r)
+        if (start < end) 
         {
-            int q = partition(arr, p, r);
-            quickSort(arr, p, q-1);
-            quickSort(arr, q+1, r);
+            int p = partition(names, start, end);
+            quickSort(names, start, p - 1);
+            quickSort(names, p + 1, end);
         }
     }
-    public static void main(String args[])
+
+
+    static int partition(ArrayList<String> names, int start, int end) 
     {
-        Scanner in = new Scanner(System.in);
-        System.out.println("Enter the list size");
-        int n = in.nextInt();
-        String s = in.nextLine();
-        String[] arr = new String[n];
-        System.out.println("Enter the names");
-        for(int i=0; i<n; i++)
-            arr[i] = in.nextLine();
-        quickSort(arr, 0, n-1);
-        System.out.println("Sorted array = "+ Arrays.toString(arr));
+        int i = start;
+        String name1,name2;
+        for (int j = start; j < end; j++) 
+        {
+            name1=names.get(j);
+            name2=names.get(end);
+            if (name1.compareToIgnoreCase(name2) <= 0) 
+            {
+                swap(names, i, j);
+                i++;
+            }
+        }
+        swap(names, i, end);
+        return i;
     }
+
+     static void swap(ArrayList<String> names, int i, int j) {
+        String name = names.get(i);
+        names.set(i, names.get(j));
+        names.set(j, name);
+    }
+
+    
 }

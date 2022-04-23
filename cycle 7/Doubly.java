@@ -1,21 +1,29 @@
 import java.util.*;
-class Doubly
+public class DoublyLinkedList 
 {
     public static void main(String args[])
     {
-        LinkedList<String> list = new LinkedList<String>();
-        list.add("Nooha");
-        list.add("Almira");
-        list.add("Angath");
-        list.add("Asher");
-        list.add("Ashwin");
-        list.add(0,"Muhammed");
+        LinkedList <String> list = new LinkedList <String>();
+        int n;
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter the Names:");
+        String temp;
+        temp="";
+        while(!temp.equals("stop"))
+        {
+            temp=scanner.next();
+            if(!temp.equals("stop"))
+            list.add(temp);
+        } 
+        
         System.out.println(list+"\n");
-        list.remove(4);
-        list.remove("Nooha");
-        Iterator itr = list.iterator();
-        System.out.println("The list, after deletion, contains:");
-        while(itr.hasNext())
-        System.out.println(itr.next());
+        System.out.println("Enter the index of item to be deleted");
+        n=scanner.nextInt();
+        list.remove(n);
+        Iterator i = list.iterator();
+        System.out.println("List after deletion:");
+        System.out.println(list+"\n");
+
+        
     }
 }
