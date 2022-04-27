@@ -3,9 +3,9 @@ import javax.swing.*;
 import java.awt.event.*;
 
  
-class Calculator
+class Calc
 {
-    Calculator()
+    Calc()
     {
         //CONTAINERS
         JFrame frame = new JFrame("Simple Calc");
@@ -228,7 +228,7 @@ class Calculator
                                 break;
                         }
                         if(flag == 1)
-                           result.setText("MATH ERROR");
+                           result.setText("Division by Zero");
                         else if(res == (int)res)
                             result.setText((int)res+"");
                         else
@@ -287,7 +287,7 @@ class Calculator
                         break;
                 }
                 if(flag == 1)
-                result.setText("MATH ERROR");
+                result.setText("Division by Zero");
                         else if(res == (int)res)
                             result.setText((int)res+"");
                         else
@@ -300,6 +300,6 @@ class Calculator
     }
     public static void main(String args[])
     {
-        new Calculator();
+        new Calc();
     }
 }

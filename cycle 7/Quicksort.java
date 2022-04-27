@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Quicksort {
+public class QuickSort {
     public static void main(String[] args) 
     {
         Scanner scanner = new Scanner(System.in);
