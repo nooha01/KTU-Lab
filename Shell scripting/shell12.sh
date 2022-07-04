@@ -1,16 +1,16 @@
 echo "Currently logged user"
 who
-echo "Logname:"
+echo -e "\nLogname:"
 users
-echo "Current Shell:"
+echo -e "\nCurrent Shell:"
 echo $SHELL
-echo "Home Directory:"
+echo -e "\nHome Directory:"
 echo $HOME
-echo "Operating System type:"
+echo -e "\nOperating System type:"
 uname -o
-echo "Path Settings:"
+echo -e "\nPath Settings:"
 echo $PATH
-echo "Current working directory:"
+echo -e "\nCurrent working directory:"
 pwd
-echo "currently logged number of users:"
+echo -e "\nCurrently logged number of users:"
 users | wc -w

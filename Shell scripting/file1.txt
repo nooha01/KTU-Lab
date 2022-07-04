@@ -1,1 +1,2 @@
 THis TexT FILE COntaINs both Upper AND LOWER Case letters. 
+UPPER CasE
