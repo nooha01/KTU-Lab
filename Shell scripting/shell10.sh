@@ -1,3 +1,5 @@
+#!copy content of file1 to file2
+
 echo "Enter the filename"
 read file1
 echo "Enter the second file"

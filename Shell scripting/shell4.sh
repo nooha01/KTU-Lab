@@ -1,4 +1,5 @@
 #! Check file or directory
+
 echo "Enter the file/Directory name"
 read fname
 if [ -d $fname ]

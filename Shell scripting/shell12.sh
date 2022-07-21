@@ -1,3 +1,5 @@
+#!Display details
+
 echo "Currently logged user"
 who
 echo -e "\nLogname:"
