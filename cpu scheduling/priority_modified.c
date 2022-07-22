@@ -17,13 +17,13 @@ int main()
         scanf("%d%d%d",&a[i].AT,&a[i].BT,&a[i].PT);
         temp[i]=a[i].BT;
     }
-    a[9].PT=10000;
+    a[9].PT=0;
     for(t=0;count!=n;t++)
     {
         short_p=9;
         for(int i=0;i<n;i++)
         {
-            if(a[short_p].PT>a[i].PT && a[i].AT<=t && a[i].BT>0)
+            if(a[short_p].PT<a[i].PT && a[i].AT<=t && a[i].BT>0)
             {
                 short_p=i;
             }

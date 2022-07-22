@@ -44,19 +44,6 @@ int main()
   
     awt=(float)total/n;      
     total=0;
-    /*printf("\nProcess\t\tBurst Time\t\tWaiting Time\t\tTurnaround Time");
-    for(i=0;i<n;i++)
-    {
-        tat[i]=bt[i]+wt[i];   
-        total+=tat[i];
-        printf("\n\tp%d\t\t%d\t\t%d\t\t\t%d\n",p[i],bt[i],wt[i],tat[i]);
-    }*/
-    /*printf("\nGantt chart is:\n");
-    for(i=0;i<n;i++)
-    {
-       printf("|p%d|%d - %d", p[i], wt[i],tat[i]);
-    }*/
-    
     printf("\n+-----+------------+--------------+-----------------+\n");
     printf("| PID | Burst Time | Waiting Time | Turnaround Time |\n");
     printf("+-----+------------+--------------+-----------------+\n");

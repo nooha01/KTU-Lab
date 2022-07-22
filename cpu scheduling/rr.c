@@ -1,144 +1,88 @@
 #include <stdio.h>
-#include <string.h>
-int q[100],front=-1,rear=-1;
-struct process
+#include <stdlib.h>
+int main()
 {
-  char name[20];
-  int at,tt,bt,wt,status,left,ct;
-}p[20],temp;
-struct done
-{
-  char name[20];
-  int st,ct;
-}d[20];
-void enqueue(int j)
-{
-  if(front==-1 && rear==-1)
-  {
-    front++;
-  }
-  rear++;
-  q[rear] = j;
-}
-int dequeue()
-{
-  int item;
-  item = q[front];
-  if(front == rear)
-  {
-    front = -1;
-    rear = -1;
-  }
-  else
-  {
-    front++;
-  }
-  return(item);
-}
-void main()
-{
-  int n,i,j,idle=0,k,num,ls,t;
-  float avwt=0,avtt=0;
-  printf("ENTER THE NUMBER OF PROCESSES : ");
-  scanf("%d",&n);
-  for(i=0;i<n;i++)                         //Input process details
-  {
-    printf("\nENTER DETAILS OF PROCESS %d",i+1);
-    printf("\nPROCESS NAME : ");
-    scanf(" %s",p[i].name);
-    printf("ARRIVAL TIME : ");
-    scanf("%d",&p[i].at);
-    printf("BURST TIME : ");
-    scanf("%d",&p[i].bt);
-    p[i].left = p[i].bt;
-    p[i].status = 0;
-  }
-  printf("\nENTER THE TIME QUANTUM : ");
-  scanf("%d",&t);
+      int i, n, opt, time = 0, x, counter = 0, q;
+      int wt = 0, tt = 0, burst[10], temp[10];
+      float avgwt, avgtt, throughput;
+      printf("\nEnter Total Number of Processes:\t");
+      scanf("%d", &n);
+      x = n;
+      for (i = 0; i < n; i++)
+      {
+            printf("\nEnter Details of Process %d\n", i + 1);
+            printf("Burst Time:\t");
+            scanf("%d", &burst[i]);
+            temp[i] = burst[i];
+      }
+      while (1)
+      {
+            printf("\nchoose Time Quantum 1)2ms  2)4ms  3)8ms  4)10ms else)exit:\t");
+            scanf("%d", &opt);
+            switch (opt)
+            {
+            case 1:
+                  q = 2;
+                  break;
+            case 2:
+                  q = 4;
+                  break;
+            case 3:
+                  q = 8;
+                  break;
+            case 4:
+                  q = 10;
+                  break;
+            default:
+                  exit(0);
+            }
+            counter = 0;
+            wt = 0;
+            tt = 0;
+            x = n;
+            printf("Gantt chart:\n 0");
+            for (i = 0; i < n; i++)
+            {
+                  temp[i] = burst[i];
+            }
+            for (time = 0, i = 0; x != 0;)
+            {
+                  if (temp[i] <= q && temp[i] > 0)
+                  {
+                        time = time + temp[i];
+                        temp[i] = 0;
+                        counter = 1;
+                        printf(" p%d %d", i + 1, time);
+                  }
+                  else if (temp[i] > 0)
+                  {
+                        temp[i] = temp[i] - q;
+                        time = time + q;
+                        printf(" p%d %d", i + 1, time);
+                  }
 
-  for(i=0,num=0,ls=0;ls<n;)
-  {
-    for(j=0;j<n;j++)
-    {
-      if(p[j].status==0 && p[j].at<=i)
-      {
-        enqueue(j);
-        p[j].status = 1;
+                  if (temp[i] == 0 && counter == 1)
+                  {
+                        x--;
+                        wt = wt + time - burst[i];
+                        tt = tt + time;
+                        counter = 0;
+                  }
+                  if (i == n - 1)
+                  {
+                        i = 0;
+                  }
+                  else
+                  {
+                        i++;
+                  }
+            }
+            avgwt = wt * 1.0 / n;
+            avgtt = tt * 1.0 / n;
+            printf("\n\nAverage Waiting Time:\t%f", avgwt);
+            printf("\nAvg Turnaround Time:\t%f\n", avgtt);
+            throughput = (n * 1.0) / time;
+            printf("\nThroughput:\t%f\n", throughput);
       }
-    }
-    if(idle==0 && front == -1)
-    {
-      strcpy(d[num].name,"Idle");
-      d[num].st = i;
-      idle = 1;
-      i++;
-    }
-    else if(front!=-1)
-    {
-      if(idle==1)
-      {
-        d[num].ct = i;
-        idle = 0;
-        num++;
-      }
-      k = dequeue();
-      d[num].st = i;
-      strcpy(d[num].name,p[k].name);
-      if(p[k].left<=t)
-      {
-        d[num].ct = i+p[k].left;
-        p[k].ct = d[num].ct;
-        i = d[num].ct;
-        p[k].tt = i - p[k].at;
-        p[k].wt = p[k].tt - p[k].bt;
-        p[k].status = 2;
-        ls++;
-        num++;
-      }
-      else if(p[k].left>t)
-      {
-        d[num].ct = i+t;
-        i = d[num].ct;
-        p[k].left = p[k].left-t;
-        num++;
-        for(j=0;j<n;j++)
-        {
-          if(p[j].status==0 && p[j].at<=i)
-          {
-            enqueue(j);
-            p[j].status = 1;
-          }
-        }
-        enqueue(k);
-      }
-    }
-    else
-    {
-      i++;
-    }
-  }
-
-  printf("\nPROCESS NAME\tCOMPLETION TIME (ms)\tWAITING TIME (ms)\tTURNAROUND TIME (ms)\n\n");
-  for(i=0;i<n;i++)
-  {
-    printf("    %s\t\t\t%d\t\t\t%d\t\t\t%d\n",p[i].name,p[i].ct,p[i].wt,p[i].tt);
-    avwt+=p[i].wt;
-    avtt+=p[i].tt;
-  }
-  printf("\n\nGANTT CHART ");
-  printf("\n\t--------------------------------------------------------------------------\n\t");
-  for(i=0;i<num;i++)
-  {
-    printf("|");
-    printf("%s\t",d[i].name);
-  }
-  printf(" |");
-  printf("\n\t--------------------------------------------------------------------------\n\t");
-  for(i=0;i<num;i++)
-  {
-      printf("%d\t",d[i].st);
-  }
-  printf("%d\t",d[num-1].ct);
-  printf("\n\nAVERAGE WAITING TIME : %f",(avwt/n));
-  printf("\nAVERAGE TURNAROUND TIME : %f\n",(avtt/n));
+      return 0;
 }

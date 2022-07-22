@@ -29,59 +29,49 @@ int main()
         tp=(n/tp);
 	awt =awt/n;
 	att=att/n;
-	/*printf("\n\tprocess\t\tburst time\twaiting time\tturn around time\n");
-	for(i=0;i<n;i++)
-        {
-		printf("\tp%d\t\t%d\t\t%d\t\t%d\n",i+1,bt[i],w[i],t[i]);
-        }
-        printf("\nGantt chart is:\n");
-    	for(i=0;i<n;i++)
-    	{
-       		printf("|p%d|%d - %d", i+1, wt[i],t[i]);
-    	}*/
-    	printf("\n+-----+------------+--------------+-----------------+\n");
-    	printf("| PID | Burst Time | Waiting Time | Turnaround Time |\n");
-    	printf("+-----+------------+--------------+-----------------+\n");
-    	for(i=0; i<n; i++) 
-    	{
-    		printf("\n| p%2d  |     %2d     |      %2d      |        %2d    |\n",i+1,bt[i], w[i], t[i] );
-    		printf("\n+-----+------------+--------------+-----------------+");
-    	}
-    	printf(" ");
-    	printf("\n\nGantt chart is:\n");
-    	for(i=0; i<n; i++) 
-    	{
-    	    for(j=0; j<bt[i]; j++) 
-   	    	printf("--");
-    	    printf(" ");
-    	}
-   	 printf("\n|");
-    	for(i=0; i<n; i++) 
-    	{
-    	    for(j=0; j<bt[i] - 1; j++)
-    		    	printf(" ");
-    	    printf("P%d", i+1);
-            for(j=0; j<bt[i] - 1; j++)
-        	printf(" ");
-            printf("|");
-    	}
-    	printf("\n ");
-    	for(i=0; i<n; i++) 
-    	{
-    	    for(j=0; j<bt[i]; j++)
-        	printf("--");
-     	    printf(" ");
-     	}
-        printf("\n");
-        printf("0");
-        for(i=0; i<n; i++)
-        {
-        	for(j=0; j<bt[i]; j++)
-        		printf("  ");
-        	if(t[i] > 9) printf("\b"); 
-        	printf("%d", t[i]);
+	printf("\n+-----+------------+--------------+-----------------+\n");
+	printf("| PID | Burst Time | Waiting Time | Turnaround Time |\n");
+	printf("+-----+------------+--------------+-----------------+\n");
+	for(i=0; i<n; i++) 
+	{
+		printf("\n| p%2d  |     %2d     |      %2d      |        %2d    |\n",i+1,bt[i], w[i], t[i] );
+		printf("\n+-----+------------+--------------+-----------------+");
+	}
+	printf(" ");
+	printf("\n\nGantt chart is:\n");
+	for(i=0; i<n; i++) 
+	{
+		for(j=0; j<bt[i]; j++) 
+		printf("--");
+		printf(" ");
+	}
+   	printf("\n|");
+	for(i=0; i<n; i++) 
+	{
+		for(j=0; j<bt[i] - 1; j++)
+				printf(" ");
+		printf("P%d", i+1);
+		for(j=0; j<bt[i] - 1; j++)
+		printf(" ");
+		printf("|");
+	}
+	printf("\n ");
+	for(i=0; i<n; i++) 
+	{
+		for(j=0; j<bt[i]; j++)
+		printf("--");
+		printf(" ");
+	}
+	printf("\n");
+	printf("0");
+	for(i=0; i<n; i++)
+	{
+		for(j=0; j<bt[i]; j++)
+			printf("  ");
+		if(t[i] > 9) printf("\b"); 
+		printf("%d", t[i]);
  	}
-    	printf("\n");
+    printf("\n");
 	printf("\n\nAverage waiting time is= %f\n",awt);
 	printf("Average turn around time is= %f\n",att);
 	printf("Throughput is= %f\n",tp);
