@@ -2,7 +2,8 @@
 #include <unistd.h>
 #include <sys/wait.h>
 
-void main() {
+void main() 
+{
     printf("A: %d\n", getpid());
     if (fork() == 0) {
         printf("B: %d forked by %d\n", getpid(), getppid());

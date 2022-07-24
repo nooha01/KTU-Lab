@@ -1,2 +1,3 @@
-THis TexT FILE COntaINs both Upper AND LOWER Case letters. 
+this text file contains both upper and lower case letters. 
+upper caseTHis TexT FILE COntaINs both Upper AND LOWER Case letters. 
 UPPER CasE

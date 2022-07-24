@@ -5,19 +5,18 @@ int main()
       int i, n, opt, time = 0, x, counter = 0, q;
       int wt = 0, tt = 0, burst[10], temp[10];
       float avgwt, avgtt, throughput;
-      printf("\nEnter Total Number of Processes:\t");
+      printf("\nEnter Total Number of Processes: ");
       scanf("%d", &n);
       x = n;
       for (i = 0; i < n; i++)
       {
-            printf("\nEnter Details of Process %d\n", i + 1);
-            printf("Burst Time:\t");
+            printf("\nEnter Burst time of Process %d: ", i + 1);
             scanf("%d", &burst[i]);
             temp[i] = burst[i];
       }
       while (1)
       {
-            printf("\nchoose Time Quantum 1)2ms  2)4ms  3)8ms  4)10ms else)exit:\t");
+            printf("\nchoose Time Quantum 1)2ms  2)4ms  3)8ms  4)10ms 5)exit: ");
             scanf("%d", &opt);
             switch (opt)
             {
@@ -33,8 +32,10 @@ int main()
             case 4:
                   q = 10;
                   break;
-            default:
+            case 5:
                   exit(0);
+            default:
+                  printf("Not a valid choice!");
             }
             counter = 0;
             wt = 0;

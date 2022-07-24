@@ -6,7 +6,7 @@ int main()
 	int alloc[10][10],max[10][10],avail[10];
 	printf("\nEnter the number of processes:\n");
 	scanf("%d",&n);
-	printf("\nEnter the allocated spaces;\n");
+	printf("\nEnter the allocated spaces:\n");
 	for(i=0;i<n;i++)
 	{
 		for(j=0;j<m;j++)
@@ -14,7 +14,7 @@ int main()
 			scanf("%d",&alloc[i][j]);
 		}
 	}
-	printf("\nEnter the maximum space;\n");
+	printf("\nEnter the maximum space:\n");
 	for(i=0;i<n;i++)
 	{
 		for(j=0;j<m;j++)
@@ -22,7 +22,7 @@ int main()
 			scanf("%d",&max[i][j]);
 		}
 	}
-	printf("\nEnter the available space;\n");
+	printf("\nEnter the available space:\n");
 	for(i=0;i<m;i++)
 	{
 		scanf("%d",&avail[i]);
@@ -74,14 +74,14 @@ int main()
 		if(f[i]==0)
 		{
 			flag=0;
-			printf("The following system is not safe");
+			printf("The following system is not safe!");
 			break;
 		}
 	}
 	
 	if(flag==1)
 	{
-	printf("Following is the SAFE Sequence\n");
+	printf("The safe Sequence\n");
 	for (i = 0; i < n - 1; i++)
 		printf(" P%d ->", ans[i]);
 	printf(" P%d", ans[n - 1]);

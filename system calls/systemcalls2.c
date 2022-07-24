@@ -2,21 +2,19 @@
 #include <unistd.h>
 #include <sys/wait.h>
 
-void main() {
+void main() 
+{
 	int n;
-	
 	printf("Enter the value of N: ");
 	scanf("%d", &n);
-	
 	printf("\nParent pid (Main process) %d at level 0\n", getpid());
-	
 	for(int i = 1; i <= n; i++)
-		if(fork() == 0) // CHILD 1
-			printf("Child pid %d from parent pid %d at level %d\n", getpid(), getppid(), i);
-		else if(fork() == 0) // CHILD 2
-			printf("Child pid %d from parent pid %d at level %d\n", getpid(), getppid(), i);
-		else { // PARENT
-			wait(NULL);
-			i = n+1;
+	    if(fork() == 0) 
+	         printf("Child pid %d from parent pid %d at level %d\n", getpid(), getppid(), i);
+	    else if(fork() == 0) 
+		printf("Child pid %d from parent pid %d at level %d\n", getpid(), getppid(), i);
+	    else { 
+		    wait(NULL);
+	             i = n+1;
 		}
 }

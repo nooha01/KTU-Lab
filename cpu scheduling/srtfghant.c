@@ -1,72 +1,74 @@
 #include <stdio.h>
 int main()
 {
-      int arr[10], burst[10], temp[10],w[10],t[10],i, sm, cnt = 0, n,flag=0,x;
+      int AT[10], BT[10], temp[10],w[10],t[10],i, small, count = 0, n,flag=0,x;
       float avgwt, avgtt,wt = 0, tt = 0,time, end;
-      printf("Enter the Total Number of Processes:");
-      scanf("%d", &n);
-      printf("\nEnter Details of %d Processes", n);
+      printf("Enter the number of processes\n");
+      scanf("%d",&n);
       for(i=0;i<n;i++)
       {
-            printf("\nEnter Arrival Time:");
-            scanf("%d", &arr[i]);
-            printf("Enter Burst Time:");
-            scanf("%d", &burst[i]);
-            temp[i] = burst[i];
+            printf("Enter the arrival time and burst time of the process %d: ", i+1);
+            scanf("%d%d",&AT[i],&BT[i]);
+            temp[i] = BT[i];
       }
       for(i=0;i<n;i++)
       {
-      		w[i]=0;
+      	w[i]=0;
             t[i]=0;
       }
-      burst[9] = 9999;
+      BT[9] = 9999;
       printf("\nGantt chart:\n");
-      for(time=0;cnt!=n;time++)
+      for(time=0;count!=n;time++)
       {
-            sm = 9;
+            small = 9;
             for(i=0;i<n;i++)
             {
-                  if(arr[i]<=time && burst[i]<burst[sm] && burst[i]>0)
+                   
+                  if(AT[i]<=time && BT[i]<BT[small] && BT[i]>0)
                   {
-                        sm=i;
+                        small=i;
                         if(flag==0)
                         {
-
-                        	printf("%d ",arr[sm]);
-                        	printf(" p%d ",sm+1);
-                        	x=sm;
+                        	printf("%d ",AT[small]);
+                        	printf(" p%d ",small+1);
+                        	x=small;
                         }
                         flag=1;
                   }
             }
-
-            burst[sm]--;
-
-            if(burst[sm] == 0)
+            BT[small]--;
+            if(BT[small] == 0)
             {
-                  cnt++;
+                  count++;
                   end = time + 1;
-                  wt=wt+end-arr[sm]-temp[sm];
-                  w[sm]+=end - arr[sm] - temp[sm];
-                  tt = tt+end-arr[sm];
-                  t[sm]+= end - arr[sm];
+                  wt=wt+end-AT[small]-temp[small];
+                  w[small]+=end - AT[small] - temp[small];
+                  tt = tt+end-AT[small];
+                  t[small]+= end - AT[small];
             }
-            if(sm!=x)
+            if(small!=x)
             {
-            	printf(" %d ",(int)time);
-            	printf(" p%d ",sm+1);
-            	x=sm;
-			}
+                  
+                  printf(" %d ",(int)time);
+                  printf(" p%d ",small+1);
+                 
+                  x=small;
+            }
       }
       printf(" %d ",(int)end);
-      for(i = 0; i < n; i++)
-      {
-      	 	printf("\np%d wt=%d  tt=%d", i+1,w[i],t[i]);
-      }
+      printf("\n\n+-----+--------------+-----------------+\n");
+	printf("| PID | Waiting Time | Turnaround Time |\n");
+	printf("+-----+--------------+-----------------+\n");
+      for(i=0; i<n; i++) 
+	{
+		printf("\n| p%d |      %2d     |        %2d         |\n",i+1,w[i],t[i] );
+		printf("\n+-----+--------------+-----------------+");
+	}
+	printf(" ");
       avgwt = wt/n;
       avgtt = tt/n;
-      printf("\n\nAverage Waiting Time:%f\n", avgwt);
-      printf("Average Turnaround Time:%f\n", avgtt);
+      printf("\n\nAvg waiting time of the process is %f\n",avgwt);
+      printf("Avg turn around time of the process %f\n",avgtt);
       printf("Throughput:%f\n",n/end);
       return 0;
 }

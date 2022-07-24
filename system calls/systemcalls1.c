@@ -5,7 +5,6 @@
 
 void fibonacci(int n) {
 	int x = 0, y = 1;
-	
 	while(y < n) {
 		printf("%d ", y);
 		int temp = y;
@@ -17,12 +16,10 @@ void fibonacci(int n) {
 void prime(int n) {
 	for (int i = 2; i < n; i++) {
 		int flag = 0;
-		
 		for (int j = 2; j < i / 2; j++) {
 			if (i % j == 0)
 				flag = 1;
 		}
-		
 		if (flag == 0)
 			printf("%d ", i);
 	}
@@ -30,12 +27,9 @@ void prime(int n) {
 
 void main() {
 	int n;
-	
 	printf("Enter the value of N: ");
 	scanf("%d", &n);
-	
 	pid_t pid = fork();
-	
 	if(pid == 0) {
 		printf("Child (Fibonacci): ");
 		fibonacci(n);
