@@ -1,9 +1,9 @@
 #include<stdio.h>
 #include<stdlib.h>
 
-int m[10], p[10], mem, pr;
+int mem,pr;
 
-int FF()
+int FF(int m[], int p[])
 {
     
     for(int i=0;i<pr;i++)
@@ -27,7 +27,7 @@ int FF()
     }
 }
 
-int BF()
+int BF(int m[], int p[])
 {
     
     for(int i=0;i<pr;i++)
@@ -59,7 +59,7 @@ int BF()
     }
 }
 
-int WF()
+int WF(int m[], int p[])
 {
     for(int i=0;i<pr;i++)
     {
@@ -93,7 +93,7 @@ int WF()
 
 int main()
 {
-    int ch;
+    int m[10], p[10], ch;
     printf("\nEnter the number of memory blocks available: ");
     scanf("%d", &mem);
     printf("Enter the number of processes: ");
@@ -112,15 +112,15 @@ int main()
     {
         printf("\nChoose a Memory management algorithm:\n");
         printf("1.First Fit\n2.Best Fit\n3.Worst Fit\n4.Exit");
-        printf("Enter your choice: ");
+        printf("\nEnter your choice: ");
         scanf("%d", &ch);
         switch(ch)
         {
-            case 1: FF();
+            case 1: FF(m,p);
                 break;
-            case 2: BF();
+            case 2: BF(m,p);
                 break;
-            case 3: WF();
+            case 3: WF(m,p);
                 break;
             case 4: exit(0);
             default: printf("Enter a valid choice!");
