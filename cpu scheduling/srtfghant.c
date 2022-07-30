@@ -51,10 +51,10 @@ int main()
                   
                   printf(" %d ",(int)time);
                   printf(" p%d ",small+1);
-                 
                   x=small;
             }
       }
+      
       printf(" %d ",(int)end);
       printf("\n\n+-----+--------------+-----------------+\n");
 	printf("| PID | Waiting Time | Turnaround Time |\n");

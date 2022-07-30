@@ -62,7 +62,7 @@ void pre()
 	printf("+-----+------------+--------------+-----------------+\n");
 	for(i=0; i<n; i++) 
 	{
-		printf("\n| p%2d  |     %2d     |      %2d      |        %2d    |\n",i+1,burst2[i], w[i], t[i] );
+		printf("\n| p%2d  |     %2d     |      %2d      |        %2d    |\n",i+1,temp[i], w[i], t[i] );
 		printf("\n+-----+------------+--------------+-----------------+");
 	}
 	printf(" ");
@@ -99,7 +99,6 @@ void nonpre()
 			continue;
 		if (flag == 0)
 		{
-
 			printf("%d ", arr[prior]);
 		}
 		flag = 1;
@@ -107,7 +106,6 @@ void nonpre()
 		{
 
 			burst2[prior]--;
-
 			time++;
 			for (k = 0; k < n; k++)
 			{
@@ -124,7 +122,6 @@ void nonpre()
 			count++;
 			end = time + 1;
 			wt = wt + end - arr[prior] - temp[prior];
-
 			tt = tt + end - arr[prior];
 		}
 

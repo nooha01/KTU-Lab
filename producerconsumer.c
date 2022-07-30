@@ -1,7 +1,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 
-int available=1, full=0, empty, x=0;
+int mutex=1, full=0, empty, x=0;
 
 int wait(int s){
     s--;
@@ -14,21 +14,21 @@ int signal(int s){
 }
 
 void producer(){
-    available = wait(available);
+    mutex = wait(mutex);
     full = signal(full);
     empty = wait(empty);
     x++;
     printf("Producer produced item %d\n",x);
-    available = signal(available);
+    mutex = signal(mutex);
 }
 
 void consumer(){
-    available = wait(available);
+    mutex = wait(mutex);
     empty = signal(empty);
     full = wait(full);
     printf("Consumer consumed item %d\n",x);
     x--;
-    available = signal(available);
+    mutex = signal(mutex);
 }
 
 int main(){
@@ -41,13 +41,13 @@ int main(){
         printf("\nEnter your choice: ");
         scanf("%d",&n);
         switch(n){
-            case 1: if ((available==1)&& empty != 0){
+            case 1: if ((mutex==1)&& empty != 0){
                         producer();
                     }else{
                         printf("Buffer is full!!\n");
                     }
                     break;
-            case 2: if((available==1)&& full!=0){
+            case 2: if((mutex==1)&& full!=0){
                         consumer();
                     }
                     else{
