@@ -5,7 +5,6 @@ int mem,pr;
 
 int FF(int m[], int p[])
 {
-    
     for(int i=0;i<pr;i++)
     {
         int flag=0;
@@ -29,8 +28,7 @@ int FF(int m[], int p[])
 
 int BF(int m[], int p[])
 {
-    
-    for(int i=0;i<pr;i++)
+    for(int i=0;i<pr;i++)    // 100 500 200 300 600    //212 417 112 426
     {
         int best=-1,flag=0;
         for(int j=0;j<mem;j++)
