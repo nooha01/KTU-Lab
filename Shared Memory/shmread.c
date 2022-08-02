@@ -38,6 +38,4 @@ void main()
     shmdt(data);
     printf("\nSuccessfully copied to the memory.\n");
 
-    char *args[]={"./shmdisplay",NULL};
-    execvp(args[0],args);
 }
