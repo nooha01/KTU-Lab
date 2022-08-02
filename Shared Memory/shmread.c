@@ -23,7 +23,7 @@ void main()
 
     for (int i = 0; i < n; i++)
     {
-        printf("\nDetails of Student %d\n", i);
+        printf("\nDetails of Student %d\n", i+1);
         printf("Enter name: ");
         scanf("%s", st[i].name);
         printf("Enter Mark: ");
@@ -36,7 +36,7 @@ void main()
     memcpy(data, st, 10 * sizeof(Student));
 
     shmdt(data);
-    printf("\nSuccessfully copied to the memory\n");
+    printf("\nSuccessfully copied to the memory.\n");
 
     char *args[]={"./shmdisplay",NULL};
     execvp(args[0],args);
