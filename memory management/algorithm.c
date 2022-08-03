@@ -12,12 +12,12 @@ int FF(int m[], int p[])
         {
             if(p[i]<=m[j])
             {
-                printf("\nprocess%d allocated to memory block%d", i+1, j+1);
+                printf("\nProcess %d (%d kb) is allocated to block %d (%d kb)", i + 1, p[i], j+1, m[j]);
                 m[j]-=p[i];
+                printf("with Internal Fragmentation - %d\n",m[j]);
                 flag=1;
                 break;
             }
-            
         }
         if(flag==0)
         {
@@ -28,7 +28,7 @@ int FF(int m[], int p[])
 
 int BF(int m[], int p[])
 {
-    for(int i=0;i<pr;i++)    // 100 500 200 300 600    //212 417 112 426
+    for(int i=0;i<pr;i++)    
     {
         int best=-1,flag=0;
         for(int j=0;j<mem;j++)
@@ -49,8 +49,9 @@ int BF(int m[], int p[])
         }
         if(flag==1)
         {
-            printf("\nprocess%d allocated to memory block%d", i+1, best+1);
-             m[best]-=p[i];
+            printf("\nProcess %d (%d kb) is allocated to block %d (%d kb)", i + 1, p[i], best+1, m[best]);
+            m[best]-=p[i];
+            printf("internal Fragmentation is %d", m[best]);
         }
         else
             printf("\nprocess%d is waiting to be allocated!", i+1);
@@ -80,8 +81,9 @@ int WF(int m[], int p[])
         }
         if(flag==1)
         {
-            printf("\nprocess%d allocated to memory block%d", i+1, worst+1);
+            printf("\nProcess %d (%d kb) is allocated to block %d (%d kb)", i + 1, p[i], worst+1, m[worst]);
             m[worst]-=p[i];
+            printf("internal Fragmentation is %d", m[worst]);
             flag=1;
         }
         else
@@ -91,7 +93,7 @@ int WF(int m[], int p[])
 
 int main()
 {
-    int m[10], p[10], ch;
+    int m[10], m2[10],m3[10],p[10], ch;
     printf("\nEnter the number of memory blocks available: ");
     scanf("%d", &mem);
     printf("Enter the number of processes: ");
@@ -100,6 +102,8 @@ int main()
     {
         printf("Enter the size of %d memory block: ",i+1);
         scanf("%d", &m[i]);
+        m2[i]=m3[i]=m[i];
+
     }
     for(int i=0;i<pr;i++)
     {
@@ -108,7 +112,7 @@ int main()
     }
     while(1)
     {
-        printf("\nChoose a Memory management algorithm:\n");
+        printf("\n\nChoose a Memory management algorithm:\n");
         printf("1.First Fit\n2.Best Fit\n3.Worst Fit\n4.Exit");
         printf("\nEnter your choice: ");
         scanf("%d", &ch);
@@ -116,9 +120,9 @@ int main()
         {
             case 1: FF(m,p);
                 break;
-            case 2: BF(m,p);
+            case 2: BF(m2,p);
                 break;
-            case 3: WF(m,p);
+            case 3: WF(m3,p);
                 break;
             case 4: exit(0);
             default: printf("Enter a valid choice!");

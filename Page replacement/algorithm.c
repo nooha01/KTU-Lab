@@ -38,7 +38,6 @@ void fifo()
         }
     }
     printf("Number of page faults is %d", count);
-    
 }
 
 void opt()
@@ -100,7 +99,7 @@ void lru()
         for(j=0;j<f;j++)
         {
             if(fr[j]==item)
-            {0
+            {
                 prarr('H');
                 flag = 1;
             }
@@ -154,7 +153,9 @@ int main()
     {
         int choice;
         count=0;
-        printf("\nEnter\n1.FIFO \n2.Optimal\n3.LRU\n");
+        printf("\nChoose a Page Replacement algorithm:\n");
+        printf("1.FIFO\n2.Optimal\n3.LRU\n4.Exit");
+        printf("\nEnter your choice: ");
         scanf("%d",&choice);
         for(int i=0;i<f;i++)
         {
@@ -170,6 +171,7 @@ int main()
             break;
             case 3:
             lru();
+            case 4: exit(0);
             break;
         }
     }
