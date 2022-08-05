@@ -10,6 +10,7 @@ const int BACKWARD = -1;
 int dist(int a,int b){
 	return abs(a-b);
 }
+
 int is_completed(int arr[],int n){
 	for(int i=0;i<n;i++){
 		if(arr[i]!=1)
@@ -17,13 +18,15 @@ int is_completed(int arr[],int n){
 	}
 	return 1;
 }
+
 int direction(int head,int prev){
 	if(prev<=head){
-		return 1;		//scan towards right
+		return 1;		
 	}
 	else
-		return -1;		//scan towards left
+		return -1;		
 }
+
 void bubblesort(int arr[],int size){
 	int temp;
 	int flag=0;
@@ -44,7 +47,7 @@ void bubblesort(int arr[],int size){
 
 void FCFS()
 {
-    int seek=0,head=0;		
+    int seek=0,head=0,arr[10];		
 	int n;
 	printf("enter no of request:");
 	scanf("%d",&n);
@@ -66,7 +69,7 @@ void FCFS()
 
 void SCAN()
 {
-   int seek=0,prev=0,head=0,min=99999;		//disk seeking
+    int seek=0,prev=0,head=0,min=99999;		
 	int n,dir;
 	printf("enter no of request:");
 	scanf("%d",&n);
@@ -78,14 +81,13 @@ void SCAN()
 	scanf("%d",&head);
 	printf("previous head position is at:");
 	scanf("%d",&prev);
-	//prev is ignored from computation
 	for(int i=0;i<n;i++){
 		printf("enter the request %d:",i+1);
 		scanf("%d",&request[i]);
-		flag[i]=0; 				//completed process or not
+		flag[i]=0; 				
 	}
 	dir = direction(head,prev);
-	bubblesort(request,n);		//sorting requests in ascending order
+	bubblesort(request,n);		
 	for(int i=0;i<n;i++){
 		printf("%d\t",request[i]);
 	}
@@ -103,7 +105,6 @@ void SCAN()
 			}
 		}
 	}
-	
 	if(dir==FORWARD){
 		for(int i=index_min;i<n;i++){
 			if(i==n-1){
@@ -118,21 +119,18 @@ void SCAN()
 				head=request[i];
 				printf("%d\t",seek);
 			}
-			//flag[i]=1;
 		}
 		head=disk_size-1;
 		for(int i=index_min-1;i>=0;i--){
 			if(i==0){
-				//seek+=(disk_size-1);
 				seek+=dist(request[i],head);
-				printf("%d\t",seek);			//if disk size is 200,then seek is added with (199-0)
+				printf("%d\t",seek);			
 			}
 			else{
 				seek+=dist(request[i],head);
 				printf("%d\t",seek);
 				head=request[i];
 			}
-			//flag[i]=1;
 		}
 	}
 	if(dir==BACKWARD){
@@ -148,7 +146,6 @@ void SCAN()
 				head=request[i];
 				printf("%d\t",seek);
 			}
-			//flag[i]=1;
 		}
 		head=0;
 		for(int i=index_max+1;i<n;i++){
@@ -162,17 +159,15 @@ void SCAN()
 				head=request[i];
 				printf("%d\t",seek);
 			}
-			//flag[i]=1;
 		}
 
 	}
-	//printf("index max:%d",index_max);
 	printf("\ntotal seek time in scan:%d",seek);
 }
 
 void CSCAN()
 {
-    int seek=0,prev=0,head=0,min=99999;		//disk seeking
+    int seek=0,prev=0,head=0,min=99999;		
 	int n,dir;
 	printf("enter no of request:");
 	scanf("%d",&n);
@@ -184,14 +179,13 @@ void CSCAN()
 	scanf("%d",&head);
 	printf("previous head position is at:");
 	scanf("%d",&prev);
-	//prev is ignored from computation
 	for(int i=0;i<n;i++){
 		printf("enter the request %d:",i+1);
 		scanf("%d",&request[i]);
-		flag[i]=0; 				//completed process or not
+		flag[i]=0; 				
 	}
 	dir = direction(head,prev);
-	bubblesort(request,n);		//sorting requests in ascending order
+	bubblesort(request,n);	
 	for(int i=0;i<n;i++){
 		printf("%d\t",request[i]);
 	}
@@ -222,16 +216,12 @@ void CSCAN()
 		for(int i=0;i<index_min;i++){
 				seek+=dist(request[i],head);
 				head=request[i];
-				//printf("%d\t",request[i]);
-				//printf("\nseek:%d\t",seek);
 		}
 	}
 	if(dir==BACKWARD){
 		for(int i=index_max;i>=0;i--){
 				seek+=dist(request[i],head);
 				head=request[i];
-				/*printf("%d\t",request[i]);
-				printf("\nseek:%d\t",seek);*/
 		}
 		seek+=dist(head,0);
 		//printf("xxxx%d\t",seek);
@@ -242,11 +232,8 @@ void CSCAN()
 		for(int i=n-1;i>index_max;i--){
 				seek+=dist(request[i],head);
 				head=request[i];
-				/*printf("%d\t",request[i]);
-				printf("\nseek:%d\t",seek);*/
 		}
 	}
-	//printf("index max:%d",index_max);
 	printf("\ntotal seek time in scan:%d",seek);
 }
 
@@ -267,14 +254,15 @@ int main()
         switch(choice)
         {
             case 1:
-            FCFS();
+            	FCFS();
             break;
             case 2:
-            SCAN();
+            	SCAN();
             break;
             case 3:
-            CSCAN();
-            case 4: exit(0);
+            	CSCAN();
+            case 4: 
+				exit(0);
             break;
         }
     }
