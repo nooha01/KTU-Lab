@@ -23,7 +23,7 @@ void prime(int n) {
 		if (flag == 0)
 			printf("%d ", i);
 	}
-}
+}  
 
 void main() {
 	int n;
