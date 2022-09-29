@@ -1,5 +1,6 @@
 {
     "files.associations": {
+        "*html": "html",
         "stdlib.h": "c",
         "algorithm": "c",
         "stdio.h": "c",
@@ -9,6 +10,9 @@
         "string.h": "c",
         "typeinfo": "c",
         "pthread.h": "c",
-        "math.h": "c"
+        "math.h": "c",
+        "semaphore.h": "c",
+        "fcntl.h": "c",
+        "wait.h": "c"
     }
 }

@@ -4,17 +4,31 @@
 
 void main() 
 {
-	int n;
-	printf("Enter the value of N: ");
-	scanf("%d", &n);
-	printf("\nParent pid (Main process) %d at level 0\n", getpid());
-	for(int i = 1; i <= n; i++)
-	    if(fork() == 0) 
-	         printf("Child pid %d from parent pid %d at level %d\n", getpid(), getppid(), i);
-	    else if(fork() == 0) 
-		printf("Child pid %d from parent pid %d at level %d\n", getpid(), getppid(), i);
-	    else { 
-		    wait(NULL);
-	             i = n+1;
-		}
+    printf("A: %d\n", getpid());
+    if (fork() == 0) {
+        printf("B: %d forked by %d\n", getpid(), getppid());
+        if (fork() == 0) {
+            printf("D: %d forked by %d\n", getpid(), getppid());
+            if (fork() == 0) {
+                printf("H: %d forked by %d\n", getpid(), getppid());
+                if (fork() == 0) {
+                    printf("I: %d forked by %d\n", getpid(), getppid());
+                } else
+                    wait(NULL);
+            } else
+                wait(NULL);
+        } else if (fork() == 0) {
+            printf("E: %d forked by %d\n", getpid(), getppid());
+        } else if (fork() == 0) {
+            printf("F: %d forked by %d\n", getpid(), getppid());
+        } else
+            wait(NULL);
+    } else if (fork() == 0) {
+        printf("C: %d forked by %d\n", getpid(), getppid());
+        if (fork() == 0) {
+            printf("G: %d forked by %d\n", getpid(), getppid());
+        } else
+            wait(NULL);
+    } else
+        wait(NULL);
 }
