@@ -1,7 +1,5 @@
 #include<stdio.h>
 #include<stdlib.h>
-int f,p,str[30];
-int fr[4], count=0;
 
 static int disk_size=200;
 const int FORWARD = 1;
@@ -9,14 +7,6 @@ const int BACKWARD = -1;
 
 int dist(int a,int b){
 	return abs(a-b);
-}
-
-int is_completed(int arr[],int n){
-	for(int i=0;i<n;i++){
-		if(arr[i]!=1)
-			return 0;
-	}
-	return 1;
 }
 
 int direction(int head,int prev){
@@ -47,7 +37,7 @@ void bubblesort(int arr[],int size){
 
 void FCFS()
 {
-    int seek=0,head=0,arr[10];		
+    int seek=0,head=0;		
 	int n;
 	printf("enter no of request:");
 	scanf("%d",&n);
@@ -60,7 +50,7 @@ void FCFS()
 	}
 	for(int i=0;i<n-1;i++){
 		if(i==0){
-			seek+=request[i]-head;
+			seek+=abs(request[i]-head);
 		}
 		seek+=abs(request[i+1]-request[i]);
 	}
@@ -69,7 +59,7 @@ void FCFS()
 
 void SCAN()
 {
-    int seek=0,prev=0,head=0,min=99999;		
+    int seek=0,prev=0,head=0;		
 	int n,dir;
 	printf("enter no of request:");
 	scanf("%d",&n);
@@ -110,25 +100,25 @@ void SCAN()
 			if(i==n-1){
 				seek+=dist(request[i],head);
 				head=disk_size-1;
-				printf("%d\t",seek);
+				// printf("%d\t",seek);
 				seek+=dist(request[i],head);
-				printf("%d\t",seek);
+				// printf("%d\t",seek);
 			}
 			else{
 				seek+=dist(request[i],head);
 				head=request[i];
-				printf("%d\t",seek);
+				// printf("%d\t",seek);
 			}
 		}
 		head=disk_size-1;
 		for(int i=index_min-1;i>=0;i--){
 			if(i==0){
 				seek+=dist(request[i],head);
-				printf("%d\t",seek);			
+				// printf("%d\t",seek);			
 			}
 			else{
 				seek+=dist(request[i],head);
-				printf("%d\t",seek);
+				// printf("%d\t",seek);
 				head=request[i];
 			}
 		}
@@ -138,26 +128,26 @@ void SCAN()
 			if(i==0){
 				seek+=dist(request[i],head);
 				seek+=request[i];
-				printf("%d\t",seek);
+				// printf("%d\t",seek);
 				head=0;
 			}
 			else{
 				seek+=dist(request[i],head);
 				head=request[i];
-				printf("%d\t",seek);
+				// printf("%d\t",seek);
 			}
 		}
 		head=0;
 		for(int i=index_max+1;i<n;i++){
 			if(i==0){
 				seek+=dist(request[i],head);
-				printf("%d\t",seek);
+				// printf("%d\t",seek);
 				head=request[i];
 			}
 			else{
 				seek+=dist(request[i],head);
 				head=request[i];
-				printf("%d\t",seek);
+				// printf("%d\t",seek);
 			}
 		}
 
@@ -207,8 +197,8 @@ void CSCAN()
 		for(int i=index_min;i<n;i++){
 				seek+=dist(request[i],head);
 				head=request[i];
-				printf("%d\t",request[i]);
-				printf("\nseek:%d\t",seek);
+				// printf("%d\t",request[i]);
+				// printf("\nseek:%d\t",seek);
 		}
 		seek+=dist(head,disk_size-1);
 		head=0;
@@ -242,15 +232,10 @@ int main()
     while(1)
     {
         int choice;
-        count=0;
-        printf("\nChoose a Page Replacement algorithm:\n");
+        printf("\nChoose a Disk scheduling algorithm:\n");
         printf("1.FCFS\n2.SCAN\n3.C-SCAN\n4.Exit");
         printf("\nEnter your choice: ");
         scanf("%d",&choice);
-        for(int i=0;i<f;i++)
-        {
-            fr[i]=-1;
-        }
         switch(choice)
         {
             case 1:

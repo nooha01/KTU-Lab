@@ -42,7 +42,6 @@ void bubbleSort(Student *s_details, int n)
 
 void main()
 {
-    char str[100];
     Student st[10];
     key_t key = ftok("shmfile", 65);
     int shmid = shmget(key, 1024, 0666 );
