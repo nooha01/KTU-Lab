@@ -56,7 +56,7 @@ int main()
             { 
                   temp[i] = temp[i] - q; 
                   time = time + q;
-				  printf(" p%d %d",i+1,time); 
+			printf(" p%d %d",i+1,time); 
             } 
             
             if(temp[i] == 0 && counter == 1) 
