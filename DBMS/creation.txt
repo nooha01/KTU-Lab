@@ -1,0 +1,225 @@
+﻿/*Fathima Nooha Kottangodan
+   B20CSA28
+   Experiment: Creation and insertion into tables*/
+
+ 
+SQL> create table branch (branchno varchar(20) primary key, street varchar(20), city varchar(20), postcode varchar(20));
+Table created.
+
+SQL> insert into branch values ('B005', '22 Deer Rd', 'London','SW1 4EH');
+1 row created.
+
+SQL> insert into branch values ('B007', '16 Argyl St', 'Aberdeen','AB2 3SU');
+1 row created.
+
+SQL> insert into branch values ('B003', '163 Main St', 'Glasgow','G11 9QX');
+1 row created.
+
+SQL> insert into branch values ('B004', '32 Manse Rd', 'Bristol','BS99 INZ');
+1 row created.
+
+SQL> insert into branch values ('B002', '52 Clover Dr', 'London','NW10 6EU');
+1 row created.
+
+SQL> select * from branch;
+
+BRANCHNO             STREET               CITY            POSTCODE
+-------------------- -------------------- -------------------- --------------------
+B005                 22 Deer Rd           London		SW1 4EH
+B007                 16 Argyl St          Aberdeen		AB2 3SU
+B003                 163 Main St          Glasgow		G11 9QX
+B004                 32 Manse Rd          Bristol		BS99 INZ
+B002                 52 Clover Dr         London		NW10 6EU
+
+
+SQL> create table staff (staffno varchar(20) primary key, fname varchar(20), iname varchar(20), position varchar(20), sex char(2), dob date, salary int, branchno varchar(20), foreign key (branchno) references branch);
+Table created.
+
+SQL> insert into staff values('sL21', 'John','White','Manager','M','1-OCT-45',30000,'B005');
+1 row created.
+
+SQL> insert into staff values('SG37', 'Ann','Beech','Assistant','F','10-NOV-60',12000,'B003');
+1 row created.
+
+SQL> insert into staff values('SG14', 'David','Ford','Supervisor','M','24-March-58',18000,'B003');
+1 row created.
+
+SQL> insert into staff values('SA9', 'Mary','Howe','Assistant','F','19-Feb-70',9000,'B007');
+1 row created.
+
+SQL> insert into staff values('SG5', 'Susan','Brand','Manager','F','3-Jun-40',24000,'B003');
+1 row created.
+
+SQL> insert into staff values('S141', 'Julie','Lee','Assistant','F','13-Jun-65',9000,'B005');
+1 row created.
+
+SQL> select * from staff;
+
+STAFFNO              FNAME                INAME           POSITION       SEX    DOB 
+-------------------- -------------------- -------------------- -------------------- ------- ---------  
+SALARY  BRANCHNO
+------------ ------------------
+sL21                     John                     White                Manager                M     01-OCT-45     
+30000        B005
+SG37                     Ann                     Beech                Assistant                F      10-NOV-60   
+12000        B003
+SG14                     David                  Ford                  Supervisor             M     24-MAR-58     
+18000        B003
+SA9                       Mary                   Howe                 Assistant                F     19-FEB-70  
+9000          B007
+SG5                       Susan                  Brand                 Manager                F      03-JUN-40     
+24000        B003
+S141                       Julie                   Lee                     Assistant               F       13-JUN-65     
+9000          B005
+
+6 rows selected.
+
+SQL> create table propertyforrent (propertyno varchar(20) primary key, street varchar(20), city varchar(20), postcode varchar(20), type varchar(20), rooms int, rent int, ownerno varchar(20), staffno varchar(20), branchno varchar(20), foreign key (staffno) references staff, foreign key (branchno) references branch);
+Table created.
+
+SQL> insert into propertyforrent values ('PA14','16 Holhead','AB7 5SU','Aberdeen', 'House', 6, 650, 'CO46','SA9','B007');
+1 row created.
+
+SQL> insert into propertyforrent values ('PL94','6 Argyl St','London','NW2','Flat',4,400,'CO87','S141','B005');
+1 row created.
+
+ SQL> insert into propertyforrent values ('PA14','16 Holhead','Aberdeen','AB7 5SU','House',6,650,'CO46','SA9','B007');
+1 row created.
+
+SQL> insert into propertyforrent values ('PG21','18 Dale Rd','Glasgow','G12','House',5,600,'CO87','SG37','B003');
+1 row created.
+
+SQL> insert into propertyforrent values ('PG16','5 NOvar Dr','Glasgow','G12 9AX','Flat',4,450,'CO93','SG14','B003');
+
+1 row created.
+
+SQL> select * from propertyforrent;
+
+PROPERTYNO           STREET               CITY          POSTCODE             TYPE                   
+-------------------- -------------------- -------------------- -------------------- -------------------- 
+ROOMS       RENT     OWNERNO          STAFFNO       BRANCHNO
+------------ ----------- ---------------------- -------------------- --------------------
+PL94                   6 Argyl St           London                NW2                    Flat                          
+4                400        CO87                      S141                   B005
+PG4                     6 Lawrence St    Glasgow              G11 9QX             Flat                          
+3                350        CO40                                                  B003
+PA14                   16 Holhead          Aberdeen            AB7 5SU              House                          
+6                650        CO46                       SA9                    B007
+PG21                   18 Dale Rd          Glasgow             G12                       House                          
+5                600        CO87                       SG37                  B003
+PG16                    5 NOvar Dr        Glasgow              G12 9AX              Flat                          
+4                 450        CO93                      SG14                  B003                  
+
+SQL> create table client (clientno varchar(20) primary key, fname varchar(20), iname varchar(20), tellno varchar(20), preftype varchar(20), maxrent int, email varchar(20));
+Table created.
+
+SQL> insert into client values ('CR76','John','Kay','0207-774-5632','Flat',425,'john.kay@gmail.com');
+1 row created.
+
+SQL> insert into client values ('CR36','Aline','Stewart','0141-848-1825','Flat',350,'astewart@hotmail.com');
+1 row created.
+
+SQL> insert into client values ('CR74','Mike','Ritchie','01475-392178','House',750,'mritchie01@yahoo.com');
+1 row created.
+
+SQL> insert into client values ('CR62','Mary','Treager','01224-196720','Flat',600,'maryth@hotmail.com');
+1 row created.
+
+SQL> select * from client;
+CLIENTNO             FNAME                INAME            TELLNO          PREFTYPE                
+-------------------- -------------------- -------------------- -------------------- -------------------- 
+MAXRENT    EMAIL
+--------------- --------------
+CR76                    John                     Kay                    0207-774-5632    Flat   
+425               john.kay@gmail.com
+CR36                    Aline                    Stewart               0141-848-1825   Flat   
+350               astewart@hotmail.com
+CR74                    Mike                     Ritchie                01475-392178    House 
+750               mritchie01@yahoo.com
+CR62                    Mary                     Treager               01224-196720     Flat  
+600               maryth@hotmail.com
+
+SQL> create table privateowner (ownerno varchar(20) primary key, fname varchar(20), iname varchar(20), address varchar(30),tellno varchar(20), email varchar(20), password varchar(10));
+Table created.
+
+SQL> insert into privateowner values ('C046', 'Joe','Keogh','2 Fergus Dr, Aberdeen, AB2 7SX','01224-861212','joegh@lhh.com','******');
+1 row created.
+
+SQL> insert into privateowner values ('C087', 'Carol','Farrel','6 Achray St, Glasgow, G32 9DX','0141-357-7419','ctarrel@gmail.com','******');
+1 row created.
+
+SQL> insert into privateowner values ('C040', 'Tina','Murphy','63 Well St, Glasgow, G42','0141-943-1728','tinam@hotmail.com','******');
+1 row created.
+
+SQL> insert into privateowner values ('C093', 'Tony','Shaw','12 Park p1','0141-225-7025','tonyshaw@ark.com','******');
+1 row created.
+
+SQL> select * from privateowner;
+OWNERNO             FNAME                INAME            ADDRESS                        
+-------------------- -------------------- -------------------- -------------------- 
+
+TELLNO              EMAIL                 PASSWORD
+--------------------  --------------------- -------------------
+C046                    Joe                     Keogh                    02 Fergus Dr, Aberdeen, AB2 7SX      
+01224-861212      joegh@lhh.com         ******
+C087                    Carol                  Farrel                     6 Achray St, Glasgow, G32 9DX      
+0141-357-7419     ctarrel@gmail.com   ******
+C040                    Tina                    Murphy                 63 Well St, Glasgow, G42
+0141-943-1728      tinam@hotmail.com  ******
+C093                    Tony                    Shaw                    12 Park p1      
+0141-225-7025      tonyshaw@ark.com   ******
+
+SQL> create table viewing (clientno varchar(20), foreign key (clientno) references client, propertyno varchar(20), foreign key (propertyno) references propertyforrent, viewdate date, comment1 varchar(30));
+Table created.
+
+SQL> insert into viewing values ('CR36','PA14','24-May-13','Too small');
+1 row created.
+
+SQL> insert into viewing values ('CR76','PG4','20-April-13','Too remote');
+1 row created.
+
+SQL> insert into viewing values ('CR36','PG4','26-May-13',NULL);
+1 row created.
+
+SQL> insert into viewing values ('CR62','PA14','14-May-13','No dining room');
+1 row created.
+
+SQL> insert into viewing values ('CR36','PG16','28-Apr-13',NULL);
+1 row created.
+
+SQL> select * from viewing;
+
+CLIENTNO             PROPERTYNO           VIEWDATE            COMMENT1
+-------------------- --------------------------- ---------------------- ------------------------------
+CR36                   PA14                            24-MAY-13           Too small
+CR76                   PG4                             20-APR-13             Too remote
+CR36                   PG4                             26-MAY-13
+CR62                   PA14                           14-MAY-13             No dining room
+CR36                   PG16                           28-APR-13
+
+SQL> create table registration (clientno varchar(20), branchno varchar(20), staffno varchar(20), datejoined date,foreign key (staffno) references staff, foreign key (branchno) references branch, foreign key (clientno) references client, primary key (clientno, branchno));
+Table created.
+
+SQL> insert into registration values ('CR76','B005','S141','2-JAN-13');
+1 row created.
+
+SQL> insert into registration values ('CR36','B003','SG37','11-Apr-12');
+1 row created.
+
+SQL> insert into registration values ('CR74','B003','SG37','16-Nov-11');
+1 row created.
+
+SQL> insert into registration values ('CR62','B007','SA9','7-March-12');
+1 row created.
+
+SQL> select * from registration;
+
+CLIENTNO             BRANCHNO     STAFFNO             DATEJOINED
+-------------------- -------------------- ----------------------- ----------------------
+CR76                  B005                    S141                       02-JAN-13
+CR36                  B003                    SG37                      11-APR-12
+CR74                  B003                    SG37                      16-NOV-11
+CR62                  B007                    SA9                        07-MAR-12
+
+
+
